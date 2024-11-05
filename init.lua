@@ -145,13 +145,13 @@ require('lazy').setup {
       require('which-key').setup()
 
       -- Document existing key chains
-      require("which-key").add({
-				{ "<leader>c", group = "[C]ode" },
-				{ "<leader>d", group = "[D]ocument" },
-				{ "<leader>r", group = "[R]ename" },
-				{ "<leader>s", group = "[S]earch" },
-				{ "<leader>w", group = "[W]orkspace" },
-			})
+      require('which-key').add {
+        { '<leader>c', group = '[C]ode' },
+        { '<leader>d', group = '[D]ocument' },
+        { '<leader>r', group = '[R]ename' },
+        { '<leader>s', group = '[S]earch' },
+        { '<leader>w', group = '[W]orkspace' },
+      }
     end,
   },
   { -- Fuzzy Finder (files, lsp, etc)
@@ -588,6 +588,28 @@ require('lazy').setup {
 
     'IndianBoy42/tree-sitter-just',
     opts = {},
+  },
+
+  {
+    'nvim-neo-tree/neo-tree.nvim',
+    branch = 'v3.x',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-tree/nvim-web-devicons', -- not strictly required, but recommended
+      'MunifTanjim/nui.nvim',
+    },
+    config = function()
+      local neotree = require 'neo-tree'
+
+      neotree.setup {
+        close_if_last_window = true,
+        window = {
+          width = 28,
+        },
+      }
+
+      vim.keymap.set('n', '<leader>f', '<cmd>Neotree toggle<CR>', { desc = '[f]ile tree' })
+    end,
   },
 }
 
